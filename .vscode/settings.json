@@ -8,6 +8,8 @@
     "npaka",
     "bocchi",
     "qiita",
-    "Vectorstore"
+    "Vectorstore",
+    "docstore",
+    "Multivector"
   ]
 }
