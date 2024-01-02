@@ -4,8 +4,9 @@ from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import Chroma
 
-api_key = "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"
-os.environ["OPENAI_API_KEY"] = api_key
+from dotenv import load_dotenv
+
+load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # from langchain.document_loaders import TextLoader
