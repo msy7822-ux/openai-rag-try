@@ -4,7 +4,10 @@
     "langchain",
     "dotenv",
     "vectorstores",
+    "llms",
     "npaka",
-    "bocchi"
+    "bocchi",
+    "qiita",
+    "Vectorstore"
   ]
 }
