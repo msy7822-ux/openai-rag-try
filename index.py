@@ -1,3 +1,5 @@
+## URL: https://note.com/noa813/n/n6065209e7bf0
+
 import os
 import openai
 from langchain.text_splitter import CharacterTextSplitter
