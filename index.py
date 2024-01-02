@@ -3,7 +3,8 @@ import openai
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import Chroma
-
+from langchain.chains import RetrievalQA
+from langchain.chat_models import ChatOpenAI
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -19,16 +20,21 @@ docs = text_splitter.split_text(text)
 
 embeddings = OpenAIEmbeddings()
 
+chat = ChatOpenAI(model_name="gpt-4-1106-preview", temperature=0)
+
 try:
     db = Chroma.from_texts(docs, embeddings)
     retriever = db.as_retriever()
+
+    qa_chain = RetrievalQA.from_chain_type(
+        llm=chat, chain_type="stuff", retriever=retriever
+    )
+
+    query = "人的資本の強化のために取り組んでいることは何でしょうか？"
+    context_docs = retriever.get_relevant_documents(query)
+
+    result = qa_chain.run(query)
+    print(result)
 except Exception as e:
     print("Error", e)
     pass
-finally:
-    print("Done")
-
-# query = "人的資本の強化のために取り組んでいることは何でしょうか？"
-
-# context_docs = retriever.get_relevant_documents(query)
-# context_docs[0]
