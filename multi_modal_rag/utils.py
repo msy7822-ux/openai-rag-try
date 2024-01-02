@@ -12,7 +12,7 @@ from unstructured.partition.pdf import partition_pdf
 path = "/Users/msy/ai/openai-tutorial/multi_modal_rag/"
 
 
-def delete_small_files(directory_path, max_size_kb=20):
+def delete_small_files(directory_path, max_size_kb=40):
     max_size_bytes = max_size_kb * 1024
     for filename in os.listdir(directory_path):
         file_path = os.path.join(directory_path, filename)

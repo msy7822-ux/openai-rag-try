@@ -1,5 +1,5 @@
 import utils
-import retriever as Retriever
+import retriever_utils
 import rag
 from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
@@ -12,21 +12,21 @@ def main():
     # テーブルのサマリ作成
     table_summaries = utils.summarize_tables(tables)
     # 画像のサマリ作成
-    img_base64_list, image_summaries = utils.summarize_images()
+    # img_base64_list, image_summaries = utils.summarize_images()
 
     # Multivector Retrieverの作成
     vectorstore = Chroma(
         collection_name="multi_modal_rag", embedding_function=OpenAIEmbeddings()
     )
     docstore = InMemoryStore()
-    retriever = Retriever.create_vectorstore(
+    retriever = retriever_utils.create_vectorstore(
         vectorstore,
         docstore,
         texts,
         table_summaries,
-        image_summaries,
+        [],
         tables,
-        img_base64_list,
+        [],
     )
 
     questions = ["Attention is all you needとは何か？", "Attention is all you needの著者は？"]
