@@ -34,11 +34,11 @@ def process_pdf(file):
         max_characters=4000,
         new_after_n_chars=3800,
         combine_text_under_n_chars=2000,
-        image_output_dir_path=path + "output/",
+        image_output_dir_path=path + "public/output/",
     )
 
     # delete small size files
-    delete_small_files(path + "output/")
+    delete_small_files(path + "public/output/")
 
     # Get tables and texts
     tables = []
@@ -63,9 +63,9 @@ def summarize_images():
     image_summaries = []
     img_prompt = "画像を日本語で詳細に説明してください。"
 
-    for img_file in sorted(os.listdir(path + "output/")):
+    for img_file in sorted(os.listdir(path + "public/output/")):
         if img_file.endswith(".jpg"):
-            img_path = os.path.join(path + "output/", img_file)
+            img_path = os.path.join(path + "public/output/", img_file)
             base64_image = encode_image(img_path)
             img_base64_list.append(base64_image)
             image_summaries.append(image_summarize(base64_image, img_prompt))

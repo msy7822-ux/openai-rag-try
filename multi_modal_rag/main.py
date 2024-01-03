@@ -12,7 +12,7 @@ def main():
     # テーブルのサマリ作成
     table_summaries = utils.summarize_tables(tables)
     # 画像のサマリ作成
-    # img_base64_list, image_summaries = utils.summarize_images()
+    img_base64_list, image_summaries = utils.summarize_images()
 
     # Multivector Retrieverの作成
     vectorstore = Chroma(
@@ -24,12 +24,12 @@ def main():
         docstore,
         texts,
         table_summaries,
-        [],
+        image_summaries,
         tables,
-        [],
+        img_base64_list,
     )
 
-    questions = ["Attention is all you needとは何か？", "Attention is all you needの著者は？"]
+    questions = ["transformerモデルの画像の解説をしてください。", "Attention is all you needの著者は？"]
 
     for query in questions:
         print(f"Q: {query}")
